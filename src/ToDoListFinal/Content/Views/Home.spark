@@ -1,0 +1,39 @@
+﻿<viewdata model="ToDoListFinal.HomeModel" />
+  <head>
+    <title>Title of the document</title>
+    <link rel="stylesheet" type="text/css" href="/Content/Css/Css.css">
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script src="/Content/Scripts/Scripts.js" type="text/javascript"></script>
+  </head>
+
+<div id="Container">
+    <div id="AddTaskDiv">
+        <h1 id="TextStyle">TaskManager</h1>
+        <input type="text" id="myTitle"/>
+        <br/>
+        <input type="text" id="TaskDescription"/>
+        <br/>
+        <button id="TheB">Add Task</button>
+    </div>
+
+    <div id="ToDoListDiv">
+        <ul id="ToDoList">
+         <for each="var task in Model.TNDM.listOfTasks()">
+            <div class="ItemDiv">
+              <div class="DelButton"/>
+              <div class="MoveButton"/>
+              <li class="item">
+                <label class="HiddenID">${task.ID}</label>${task.Title}</li>
+            </div>
+          </for>
+        </ul>
+    </div>
+  
+    <div id="DoneListDiv">
+        <ul id="DoneList"></ul>
+    </div>
+  
+    <div id="Description"></div>
+  
+  
+</div>
