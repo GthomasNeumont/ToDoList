@@ -4,21 +4,27 @@
     var temp;
 
     $('#TheB').click(function () {
-        $.ajax({
-            url: "http://localhost:49886/add/ToList",
-            type: "POST",
-            data: JSON.stringify({
-                MyTitle: $('#myTitle').val(),
-                Description: $('#TaskDescription').val()
-            }),
-            contentType: 'application/json; charset=utf-8',
-            dataType: "json",
-            success: function (data) {
-                $("#TestLabel").text(data.newlyAddedTask.ID);
-                console.log(data);
-                $('#ToDoList').append("<div class=\"ItemDiv\"><div class=\"DelButton\"/><div class=\"MoveButton\"/><li id=\"item\"><label class=\"HiddenID\">" + data.newlyAddedTask.ID + "</label>" + data.newlyAddedTask.Title + "</li></div>");
-            }
-        });
+        if ($('#myTitle').val() !== "" && $('#TaskDescription').val() !== "") {
+            $.ajax({
+                url: "http://localhost:49886/add/ToList",
+                type: "POST",
+                data: JSON.stringify({
+                    MyTitle: $('#myTitle').val(),
+                    Description: $('#TaskDescription').val()
+                }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                success: function (data) {
+                    $("#TestLabel").text(data.newlyAddedTask.ID);
+                    console.log(data);
+                    $('#ToDoList').append("<div class=\"ItemDiv\"><div class=\"DelButton\"/><div class=\"MoveButton\"/><li id=\"item\"><label class=\"HiddenID\">" + data.newlyAddedTask.ID + "</label>" + data.newlyAddedTask.Title + "</li></div>");
+                }
+            });
+        }
+        else
+        {
+            alert("Both Fields must be filled out!");
+        }
 
     });
 
@@ -38,21 +44,27 @@
     });
 
     $(this).on('click', '#EditButton', function () {
-        temp == $(".HiddenID").text;
-        $.ajax({
-            url: "http://localhost:49886/Edit/Task",
-            type: "POST",
-            data: JSON.stringify({
-                MyTitle: $('#EditTitle').val(),
-                Description: $('#EditTaskDescription').val(),
-                ID: $('#HiddenCornerID').text()
-            }),
-            contentType: 'application/json; charset=utf-8',
-            dataType: "json",
-            success: function (){
-                window.location.href = "/";
-            }
-        });
+        if ($('#EditTitle').val() !== "" && $('#EditTaskDescription').val() !== "" && $('#HiddenCornerID').text() !== "") {
+            temp == $(".HiddenID").text;
+            $.ajax({
+                url: "http://localhost:49886/Edit/Task",
+                type: "POST",
+                data: JSON.stringify({
+                    MyTitle: $('#EditTitle').val(),
+                    Description: $('#EditTaskDescription').val(),
+                    ID: $('#HiddenCornerID').text()
+                }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                success: function () {
+                    window.location.href = "/";
+                }
+            });
+        }
+        else
+        {
+            alert("Please select a task!");
+        }
     });
 
     $(this).on('click', '.MoveButton', function () {
