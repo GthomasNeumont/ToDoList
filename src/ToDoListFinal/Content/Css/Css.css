@@ -22,13 +22,12 @@
 }
 
 #EditDiv {
-    height:80px;
+    height:110px;
     width:300px;
     position:absolute;
     margin-left:180px;
     margin-top:30px;
-    background-color:green;
-    background: #B8ED01;
+    background-color:antiquewhite;
     text-align: center;
     border: 1px solid rgba(0,0,0,0.15);
     border-radius: 4px;
@@ -104,7 +103,7 @@
     margin-left: auto;
     margin-right: auto;
     width: 650px;
-    height:110%;
+    height: 1000px;
     background-color:grey;
     text-align: center;
     margin-top: -15px;
@@ -116,10 +115,9 @@
     margin-top: 15px;
     width: 90%;
     height:190px;
-    background-color:green;
+    background-color:antiquewhite;
     text-align: center;
     display: inline-block;
-    background: #B8ED01;
     border: 1px solid rgba(0,0,0,0.15);
     border-radius: 4px;
     transition: all 0.3s ease-out;
@@ -144,10 +142,9 @@
     margin-top: 40px;
     width: 250px;
     height:550px;
-    background-color:green;
+    background-color:antiquewhite;
     text-align: center;
     display: inline-block;
-    background: #B8ED01;
     border: 1px solid rgba(0,0,0,0.15);
     border-radius: 4px;
     transition: all 0.3s ease-out;
@@ -171,14 +168,13 @@
 
 #DoneListDiv {
     overflow-y:auto;
-    margin-top: -552px;
+    margin-top: -560px;
     margin-left: 320px;
     width: 250px;
     height:550px;
-    background-color:green;
+    background-color:antiquewhite;
     text-align: center;
     display: inline-block;
-    background: #B8ED01;
     border: 1px solid rgba(0,0,0,0.15);
     border-radius: 4px;
     transition: all 0.3s ease-out;
@@ -190,4 +186,8 @@
     text-decoration: none;
     text-shadow: 0 1px rgba(255,255,255,0.7);
     list-style:none;
+}
+
+#EditTaskDescription{
+    height:50px;
 }

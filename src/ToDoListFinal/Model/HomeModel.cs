@@ -16,7 +16,7 @@ namespace ToDoListFinal
 
         private static HomeModel instance;
 
-        protected HomeModel(){}
+        public HomeModel(){}
 
         public static HomeModel Instance()
         {

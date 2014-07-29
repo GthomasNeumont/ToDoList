@@ -67,25 +67,29 @@ namespace ToDoListFinal
         public AjaxContinuation post_Edit_Task(NewEditInputModel input)
         {
             Task T = new Task(input.MyTitle, input.Description, false);
-            if (HM.TNDM.checkIfInDictionary(input.ID))
-            {
-                T.ID = input.ID;
 
-                HM.TNDM.updateTask(input.ID,T);
-                T = HM.TNDM.getTask(input.ID);
-            }
-            else
-            {
-                T.ID = input.ID;
+                if (HM.TNDM.checkIfInDictionary(input.ID))
+                {
+                    T.ID = input.ID;
 
-                HM.TDM.updateTask(input.ID, T);
-                T = HM.TDM.getTask(input.ID);
-            }
+                    HM.TNDM.updateTask(input.ID, T);
+                    T = HM.TNDM.getTask(input.ID);
+                }
+                else
+                {
+                    T.ID = input.ID;
 
+                    HM.TDM.updateTask(input.ID, T);
+                    T = HM.TDM.getTask(input.ID);
+                }
+                
+            
             var continuation = AjaxContinuation.Successful();
             continuation["newlyAddedTask"] = T;
 
             return continuation;
+            
+
         }
 
         public AjaxContinuation post_move_Item(NewMoveInputModel input)
