@@ -98,8 +98,10 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Endpoints\NewInputModel.cs" />
-    <Compile Include="Endpoints\NewToRemoveInputModel.cs" />
+    <Compile Include="Model\NewEditInputModel.cs" />
+    <Compile Include="Model\NewInputModel.cs" />
+    <Compile Include="Model\NewMoveInputModel.cs" />
+    <Compile Include="Model\NewToRemoveInputModel.cs" />
     <Compile Include="Global.asax.cs" />
     <Compile Include="Endpoints\HomeEndpoint.cs" />
     <Compile Include="Model\HomeModel.cs" />

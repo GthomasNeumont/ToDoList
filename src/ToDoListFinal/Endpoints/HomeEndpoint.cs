@@ -32,16 +32,83 @@ namespace ToDoListFinal
 
         public AjaxContinuation post_remove_FromList(NewToRemoveInputModel input)
         {
-            HM.TNDM.RemoveFromTasks(input.ID);
+            if (HM.TNDM.checkIfInDictionary(input.ID))
+            {
+                HM.TNDM.RemoveFromTasks(input.ID);
+            }
+            else
+            {
+                HM.TDM.RemoveFromTasks(input.ID);
+            }
 
             var continuation = AjaxContinuation.Successful();
 
             return continuation;
         }
 
-        public AjaxContinuation post_edit_Item(NewToRemoveInputModel input)
+        public AjaxContinuation post_Task_Info(NewEditInputModel input)
         {
+            Task T = new Task(input.MyTitle,input.Description,false);
+            if (HM.TNDM.checkIfInDictionary(input.ID))
+            {
+                T = HM.TNDM.getTask(input.ID);
+            }
+            else
+            {
+                T = HM.TDM.getTask(input.ID);
+            }
+
             var continuation = AjaxContinuation.Successful();
+            continuation["newlyAddedTask"] = T;
+
+            return continuation;
+        }
+
+        public AjaxContinuation post_Edit_Task(NewEditInputModel input)
+        {
+            Task T = new Task(input.MyTitle, input.Description, false);
+            if (HM.TNDM.checkIfInDictionary(input.ID))
+            {
+                T.ID = input.ID;
+
+                HM.TNDM.updateTask(input.ID,T);
+                T = HM.TNDM.getTask(input.ID);
+            }
+            else
+            {
+                T.ID = input.ID;
+
+                HM.TDM.updateTask(input.ID, T);
+                T = HM.TDM.getTask(input.ID);
+            }
+
+            var continuation = AjaxContinuation.Successful();
+            continuation["newlyAddedTask"] = T;
+
+            return continuation;
+        }
+
+        public AjaxContinuation post_move_Item(NewMoveInputModel input)
+        {
+            Task T = null;
+
+            if (HM.TNDM.checkIfInDictionary(input.ID))
+            {
+                HM.TDM.AddToTasks(HM.TNDM.getTask(input.ID));
+                T = HM.TNDM.getTask(input.ID);
+                T.isComplete = true;
+                HM.TNDM.RemoveFromTasks(input.ID);
+            }
+            else
+            {
+                HM.TNDM.AddToTasks(HM.TDM.getTask(input.ID));
+                T = HM.TDM.getTask(input.ID);
+                T.isComplete = false;
+                HM.TDM.RemoveFromTasks(input.ID);
+            }
+
+            var continuation = AjaxContinuation.Successful();
+            continuation["newlyAddedTask"] = T;
             return continuation;
         }
 

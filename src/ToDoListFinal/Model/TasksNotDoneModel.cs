@@ -14,6 +14,13 @@ namespace TodoList.Models
             Tasks = new Dictionary<int,Task>();
         }
 
+        public Task getTask(int ID)
+        {
+            Task pulledObject = null;
+            Tasks.TryGetValue(ID, out pulledObject);
+            return (pulledObject);
+        }
+
         public bool AddToTasks(Task sentTask)
         {
             bool wasSuccessfull = false;
@@ -49,14 +56,18 @@ namespace TodoList.Models
             return tasks;
         }
 
-        public bool updateTask(Task oldTask, Task newTask)
+        public bool updateTask(int ID, Task newTask)
         {
             bool wasSuccessfull = false;
 
-            Tasks.Remove(oldTask.ID);
-            Tasks.Add(newTask.ID, newTask);
+            Task T = getTask(ID);
+            T.ID = ID;
+            T.Title = newTask.Title;
+            T.Description = newTask.Description;
+            Tasks.Remove(ID);
+            Tasks.Add(T.ID, T);
 
-            if (!checkIfInDictionary(oldTask.ID) && checkIfInDictionary(newTask.ID))
+            if (checkIfInDictionary(ID))
             {
                 wasSuccessfull = true;
             }
@@ -64,7 +75,7 @@ namespace TodoList.Models
             return wasSuccessfull;
         }
 
-        private bool checkIfInDictionary(int ID)
+        public bool checkIfInDictionary(int ID)
         {
             bool found = false;
 

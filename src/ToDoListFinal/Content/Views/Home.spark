@@ -7,33 +7,58 @@
   </head>
 
 <div id="Container">
-    <div id="AddTaskDiv">
-        <h1 id="TextStyle">TaskManager</h1>
-        <input type="text" id="myTitle"/>
-        <br/>
-        <input type="text" id="TaskDescription"/>
-        <br/>
-        <button id="TheB">Add Task</button>
-    </div>
+  <label id="HiddenCornerID"></label>
+  <br/>
+  <div id="AddTaskDiv">
+    <h1 id="TextStyle">TaskManager</h1>
+    <input type="text" id="myTitle"/>
+    <br/>
+    <input type="text" id="TaskDescription"/>
+    <br/>
+    <button id="TheB">Add Task</button>
+  </div>
 
-    <div id="ToDoListDiv">
-        <ul id="ToDoList">
-         <for each="var task in Model.TNDM.listOfTasks()">
-            <div class="ItemDiv">
-              <div class="DelButton"/>
-              <div class="MoveButton"/>
-              <li class="item">
-                <label class="HiddenID">${task.ID}</label>${task.Title}</li>
-            </div>
-          </for>
-        </ul>
-    </div>
-  
-    <div id="DoneListDiv">
-        <ul id="DoneList"></ul>
-    </div>
-  
-    <div id="Description"></div>
-  
-  
+  <div id="ToDoListDiv">
+    <ul id="ToDoList">
+      <for each="var task in Model.TNDM.listOfTasks()">
+        <div class="ItemDiv">
+          <div class="DelButton"/>
+          <div class="MoveButton"/>
+          <li class="item">
+            <label class="HiddenID">${task.ID}</label>${task.Title}
+          </li>
+        </div>
+      </for>
+    </ul>
+  </div>
+  <br/>
+
+  <div id="DoneListDiv">
+    <ul id="DoneList">
+      <for each="var task in Model.TDM.listOfTasks()">
+        <div class="ItemDiv">
+          <div class="DelButton"/>
+          <div class="MoveButton"/>
+          <li class="item">
+            <label class="HiddenID">${task.ID}</label>${task.Title}
+          </li>
+        </div>
+      </for>
+    </ul>
+  </div>
+
+  <div id="Description"></div>
+
+
+
+  <div id="EditDiv">
+    <input type="textarea" id="EditTitle"/>
+    <br/>
+    <input type="textarea" id="EditTaskDescription"/>
+    <br/>
+
+    <button id="EditButton">Edit Task</button>
+    <br/>
+    <!--<label class="HiddenEditID">${task.ID}</label>-->
+  </div>
 </div>

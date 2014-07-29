@@ -20,7 +20,7 @@ namespace TodoList.Models
 
             Tasks.Add(sentTask.ID, sentTask);
 
-            if (checkIfInDictionary(sentTask))
+            if (checkIfInDictionary(sentTask.ID))
             {
                 wasSuccessfull = true;
             }
@@ -28,11 +28,18 @@ namespace TodoList.Models
             return wasSuccessfull;
         }
 
-        public bool RemoveFromTasks(Task sentTask)
+        public Task getTask(int ID)
+        {
+            Task pulledObject = null;
+            Tasks.TryGetValue(ID, out pulledObject);
+            return (pulledObject);
+        }
+
+        public bool RemoveFromTasks(int sentTask)
         {
             bool wasSuccessfull = false;
 
-            Tasks.Remove(sentTask.ID);
+            Tasks.Remove(sentTask);
 
             if (!checkIfInDictionary(sentTask))
             {
@@ -49,14 +56,18 @@ namespace TodoList.Models
             return tasks;
         }
 
-        public bool updateTask(Task oldTask, Task newTask)
+        public bool updateTask(int ID, Task newTask)
         {
             bool wasSuccessfull = false;
 
-            Tasks.Remove(oldTask.ID);
-            Tasks.Add(newTask.ID, newTask);
+            Task T = getTask(ID);
+            T.ID = ID;
+            T.Title = newTask.Title;
+            T.Description = newTask.Description;
+            Tasks.Remove(ID);
+            Tasks.Add(T.ID, T);
 
-            if (!checkIfInDictionary(oldTask) && checkIfInDictionary(newTask))
+            if (checkIfInDictionary(ID))
             {
                 wasSuccessfull = true;
             }
@@ -64,11 +75,11 @@ namespace TodoList.Models
             return wasSuccessfull;
         }
 
-        private bool checkIfInDictionary(Task task)
+        public bool checkIfInDictionary(int ID)
         {
             bool found = false;
 
-            if (Tasks.ContainsKey(task.ID))
+            if (Tasks.ContainsKey(ID))
             {
                 found = true;
             }
